@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package userPackage;
+
+service Profile {
+    rpc GetOrder(OrderPayload) returns (OrderStatus) {}
+}
+
+service Test {
+    rpc TestService(Empty) returns (Response) {};
+}
+
+message Empty {}
+
+message OrderPayload {
+    string userId = 1;
+    string orderStatus = 2;
+    repeated Product products = 3;
+
+}
+
+message Product{
+    string productId = 1;
+    string productName = 2;
+}
+
+
+message OrderStatus {
+    string status = 1;
+}
+
+message Response {
+    int32 code = 1;
+    string status = 2;
+    int64 timestamp = 3;
+    string data = 4;
+    string error = 5;
+}
+
+message DanKycInfoPayload {
+    string data = 1;
+}
