@@ -1,6 +1,9 @@
 import {Request, Response, NextFunction} from "express";
+import { CustomRequest } from "../interfaces/global.interfaces";
+import * as jwt from 'jsonwebtoken';
 const username = "ayush"
 const password = "12345"
+const secretKey = 'secret'
 class Auth {
 
     constructor(){
@@ -20,6 +23,21 @@ class Auth {
         }else{
             return res.status(401).send('Authentication failed');
         }
+    }
+
+    bearerAuth(req:CustomRequest, res:Response,next:NextFunction){
+        const token = req.header('Authorization')?.split(' ')[1];
+        try{
+            if (!token) {
+                return res.status(401).json({ message: 'Access denied' });
+              }
+            let decodedData = jwt.verify(token, secretKey);
+            req.userData = decodedData;
+            next();
+        }catch(error){
+            res.send(error);
+        }
+
     }
 
 }

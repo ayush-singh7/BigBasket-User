@@ -60,9 +60,11 @@ class OnboardingRoutes {
             
         );
         
-        this.route.post('/signup',)
+        this.route.post('/signup',onboardingControllers.signup)
 
+        this.route.patch('/update-user',auth.bearerAuth,onboardingControllers.updateUser)
 
+        this.route.patch('/add-address',onboardingControllers.addAddress)
 
         return this.route;
     }

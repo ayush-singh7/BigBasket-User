@@ -21,9 +21,7 @@ export interface CustomRequest extends Request {
     cognitoUserData?: {
         [key: string]: any;
     };
-    userData?: {
-        [key: string]: any;
-    };
+    userData?: any;
     sessionData?: {
         [key: string]: any;
     };
